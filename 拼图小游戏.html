@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>拼图小游戏</title>
+        <style type="text/css">
+        div{
+            width:160px;
+            height:266px;
+        }
+        #d1{
+            background-image: url("2.jpg");
+            background-position:0px 0px;
+        }
+        #d2{
+            background-image: url("2.jpg");
+            
+            background-position-x: -160px;
+        }
+        #d3{
+            background-image: url("2.jpg");
+            
+            background-position-x: -320px;
+        }
+        #d4{
+            background-image: url("2.jpg");
+            
+            background-position-y: -266px;
+        }
+        #d5{
+            background-image: url("2.jpg");
+            
+            background-position: -160px -266px;
+        }
+        #d6{
+            background-image: url("2.jpg");
+          
+            background-position: -320px -266px;
+        }
+        #d7{
+            background-image: url("2.jpg");
+           
+            background-position-y: -532px;
+        }
+        #d8{
+            background-image: url("2.jpg");
+            
+            background-position: -160px -532px;
+        }
+        #d9{
+            background-image: url("2.jpg");
+         
+            background-position: -320px -532px;
+        }
+
+        </style>
+        <script type="text/javascript">
+        function aa(e){
+        var id=e.target.id;
+        e.dataTransfer.setData("id",id);
+        }
+        function bb(e){//实现两个div的互换
+        var dd=e.dataTransfer.getData("id");
+        var fang=document.getElementById(e.target.id);
+        var zhua=document.getElementById(dd);
+        var bz=zhua.parentNode;
+        var fp=fang.parentNode;
+        bz.appendChild(fang);
+        fp.appendChild(zhua);
+        jc();
+        }
+        function cc(e){
+            e.preventDefault();
+        }
+        function jc(){//检查是否拼图成功
+            var tus=document.getElementsByClassName("tu");
+            var count=0;
+            for(var i=0;i<tus.length;i++){
+                var tu=tus[i];
+                var tuid=tu.getAttribute("id");
+                var tunumber=tuid.replace("d","");
+                var tunumber=parseInt(tunumber);
+                if(tunumber==(i+1)){
+                 count+=1;
+                }
+            }
+            if(count==9){
+                tingzhi();
+                alert("成功啦！！！你用时"+num+"秒");
+               
+            }
+        }
+        function dl(){//将图片随机分布
+            var tus=document.getElementsByClassName("tu");
+            for(var i=0;i<100;i++){
+                var ww=parseInt(Math.random()*9);
+                var kk=parseInt(Math.random()*9);
+                var w1=tus[ww].parentNode;
+                var k1=tus[kk].parentNode;
+                w1.appendChild(tus[kk]);
+                k1.appendChild(tus[ww]);
+                
+            }
+            setTimeout("jishi()",1000);//打开开关的同时调用计数器
+        }
+        var i;
+        var num=0;
+        function jishi(){//定时计数器
+            num=num+1;
+            i=setTimeout("jishi()",1000);
+        }
+        function tingzhi(){//停止
+            clearTimeout(i);
+        }
+        </script>
+    </head>
+    <body background="C:\Users\76289\Desktop\cxy\1.png">
+       <input type="button" value="开始游戏" onclick="dl()" />
+       <table border="1">
+       <tr>
+           <td>
+               <div id="v1" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d1" draggable="true" ondragstart="aa(event)"></div></div>
+       </td>
+       <td>
+           <div id="v2" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d2" draggable="true" ondragstart="aa(event)"></div></div>
+    </td>
+    <td>
+         <div id="v3" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d3" draggable="true" ondragstart="aa(event)"></div></div>
+    </td>
+</tr>
+    <tr>
+        <td><div id="v4" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d4" draggable="true" ondragstart="aa(event)"></div></div>
+    </td>
+    <td>
+        <div div="v5" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d5" draggable="true" ondragstart="aa(event)"></div></div>
+    </td>
+    <td> <div div="v6" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d6" draggable="true" ondragstart="aa(event)"></div></div>
+    </td></tr>
+<tr><td>
+    <div div="v7" ondrop="bb(event)" ondragover="cc(event)"><div class="tu"  id="d7" draggable="true" ondragstart="aa(event)"></div></div>
+    </td>
+    <td><div div="v8" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d8" draggable="true" ondragstart="aa(event)"></div></div>
+    </td>
+    <td>
+        <div div="v9" ondrop="bb(event)" ondragover="cc(event)"><div class="tu" id="d9" draggable="true" ondragstart="aa(event)"></div></div>
+    </td></tr></table></body>
+</html>
